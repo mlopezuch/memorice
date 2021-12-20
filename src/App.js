@@ -3,9 +3,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Holi Mundo</h1>
-      </header>
+      <div className="container">
+        <img src="/img/cover.png" alt="" />
+      </div>
     </div>
   );
 }
