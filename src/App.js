@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import { useState, useEffect } from "react";
 import "./App.css";
 import SingleCard from "./SingleCard";
 
@@ -18,6 +17,21 @@ function App() {
   };
 
   const [cards, setCards] = useState([]);
+  const [choiceOne, setChoiceOne] = useState(null);
+  const [choiceTwo, setChoiceTwo] = useState(null);
+
+
+
+  const VerificaMatch = () => {
+
+  }
+
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      VerificaMatch()
+    }
+
+  }, [choiceOne, choiceTwo]);
 
   useEffect(() => {
     barajaTarjetas();
@@ -27,7 +41,10 @@ function App() {
     <div className="App">
       <div className="container">
         {cards.map((card) => (
-          <SingleCard key={Math.random()} card={card} />
+          <SingleCard
+            key={Math.random()}
+            card={card}
+          />
         ))}
       </div>
     </div>

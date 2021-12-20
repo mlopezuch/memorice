@@ -4,7 +4,7 @@ function SingleCard({ card }) {
   const [flipped, setFlipped] = useState(false);
 
   const handleClick = () => {
-    setFlipped((prev) => !prev);
+    setFlipped(true);
   };
 
   return (
