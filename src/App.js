@@ -1,19 +1,34 @@
+import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import "./App.css";
 import SingleCard from "./SingleCard";
 
+const initcards = [
+  { src: "/img/potion.png" },
+  { src: "/img/helmet.png" },
+  { src: "/img/ring.png" },
+  { src: "/img/sword.png" },
+];
+
 function App() {
-  
+  const barajaTarjetas = () => {
+    let newCards = [...initcards, ...initcards];
+    let sortedCards = newCards.sort(() => Math.random() - 0.5);
+    setCards(sortedCards);
+  };
+
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    barajaTarjetas();
+  }, []);
+
   return (
     <div className="App">
       <div className="container">
-        {
-          Array(4).fill("").map(() => (
-              <SingleCard 
-                key={Math.random()}
-                />
-            )
-          )
-        }
+        {cards.map((card) => (
+          <SingleCard key={Math.random()} card={card} />
+        ))}
       </div>
     </div>
   );
