@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useState } from "react";
 
 function SingleCard() {
-    return (
-        <div className='card'>
-            <img className='figure' src="/img/potion.png" alt="figure" />
-            <img className='cover' src="/img/cover.png" alt="cover" />
-        </div>
-    )
+
+    const [flipped, setFlipped] = useState(false)
+
+  const handleClick = () => {
+    setFlipped(prev => !prev)
+  };
+
+  return (
+    <div className={`card${flipped ? ' flipped':''}`} onClick={handleClick}>
+      <img className="figure" src="/img/potion.png" alt="figure" />
+      <img className="cover" src="/img/cover.png" alt="cover"  />
+    </div>
+  );
 }
 
-export default SingleCard
+export default SingleCard;

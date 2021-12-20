@@ -23,10 +23,27 @@
 .card img {
     border: 2px solid white;
     border-radius: 7px;
-    cursor: pointer
+    cursor: pointer;
+    transition: all ease-in 0.2s;
+}
+
+.card .cover {
+    transform: rotateY(0deg);
+    transition-delay: 0.2s;
 }
 
 .card .figure {
     position: absolute;
     transform: rotateY(90deg);
+    transition-delay: 0s;
+}
+
+.flipped .cover {
+    transform: rotateY(90deg);
+    transition-delay: 0s;
+}
+
+.flipped .figure {
+    transition-delay: 0.2s;
+    transform: rotateY(0deg)
 }
