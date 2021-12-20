@@ -13,5 +13,20 @@
 .container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+    grid-gap: 20px;
+}
+
+.card {
+    position: relative;
+}
+
+.card img {
+    border: 2px solid white;
+    border-radius: 7px;
+    cursor: pointer
+}
+
+.card .figure {
+    position: absolute;
+    transform: rotateY(90deg);
 }

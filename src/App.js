@@ -1,10 +1,26 @@
-import './App.css';
+import "./App.css";
+import SingleCard from "./SingleCard";
 
 function App() {
+
+  const handleClick = () => {
+    console.log("Hey!");
+  }
+
+  //console.log("aaaaaaa");
+
   return (
     <div className="App">
       <div className="container">
-        <img src="/img/cover.png" alt="" />
+        {
+          Array(4).fill("").map(() => (
+              <SingleCard 
+                key={Math.random()} 
+                onClick={handleClick}
+                />
+            )
+          )
+        }
       </div>
     </div>
   );
