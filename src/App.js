@@ -33,12 +33,22 @@ function App() {
   };
 
   useEffect(() => {
+    choiceOne && !choiceTwo && console.log('choiceOne vale: ',choiceOne);
+    choiceTwo && console.log('choiceTwo vale: ',choiceTwo);
+
     if (choiceOne && choiceTwo) {
       if (choiceOne.src === choiceTwo.src) {
         console.log("Hay match! 😉");
-        setTimeout(() => {
-          resetTurn();
-        }, 500);
+        setCards((prev) => {
+          return prev.map((card) => {
+            if (card.src === choiceOne.src) {
+              return { ...card, matched: true };
+            } else {
+              return card;
+            }
+          });
+        });
+        resetTurn();
       } else {
         setTimeout(() => {
           resetTurn();

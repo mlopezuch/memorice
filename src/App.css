@@ -1,6 +1,6 @@
 .App {
     text-align: center;
-    background-color: #382738;
+    background-color: #1b1523;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -14,36 +14,4 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
-}
-
-.card {
-    position: relative;
-}
-
-.card img {
-    border: 2px solid white;
-    border-radius: 7px;
-    cursor: pointer;
-    transition: all ease-in 0.2s;
-}
-
-.card .cover {
-    transform: rotateY(0deg);
-    transition-delay: 0.2s;
-}
-
-.card .figure {
-    position: absolute;
-    transform: rotateY(90deg);
-    transition-delay: 0s;
-}
-
-.flipped .cover {
-    transform: rotateY(90deg);
-    transition-delay: 0s;
-}
-
-.flipped .figure {
-    transition-delay: 0.2s;
-    transform: rotateY(0deg)
 }
