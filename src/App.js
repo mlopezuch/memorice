@@ -3,34 +3,48 @@ import "./App.css";
 import SingleCard from "./SingleCard";
 
 const initcards = [
-  { src: "/img/potion.png" },
-  { src: "/img/helmet.png" },
-  { src: "/img/ring.png" },
-  { src: "/img/sword.png" },
+  { src: "/img/potion.png", matched: false },
+  { src: "/img/helmet.png", matched: false },
+  { src: "/img/ring.png", matched: false },
+  { src: "/img/sword.png", matched: false },
 ];
 
 function App() {
   const barajaTarjetas = () => {
     let newCards = [...initcards, ...initcards];
     let sortedCards = newCards.sort(() => Math.random() - 0.5);
-    setCards(sortedCards);
+    let finalcards = sortedCards.map((card) => {
+      return { ...card, id: Math.random() };
+    });
+    setCards(finalcards);
   };
 
   const [cards, setCards] = useState([]);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
 
+  const handleChoice = (card) => {
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+  };
 
-
-  const VerificaMatch = () => {
-
-  }
+  const resetTurn = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+  };
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
-      VerificaMatch()
+      if (choiceOne.src === choiceTwo.src) {
+        console.log("Hay match! 😉");
+        setTimeout(() => {
+          resetTurn();
+        }, 500);
+      } else {
+        setTimeout(() => {
+          resetTurn();
+        }, 500);
+      }
     }
-
   }, [choiceOne, choiceTwo]);
 
   useEffect(() => {
@@ -39,11 +53,14 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Memorice</h1>
       <div className="container">
         {cards.map((card) => (
           <SingleCard
-            key={Math.random()}
+            key={card.id}
             card={card}
+            handleChoice={handleChoice}
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
           />
         ))}
       </div>

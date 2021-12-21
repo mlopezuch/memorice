@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-function SingleCard({ card }) {
-  const [flipped, setFlipped] = useState(false);
+function SingleCard({ card, handleChoice, flipped }) {
 
   const handleClick = () => {
-    setFlipped(true);
+    handleChoice(card);
   };
 
   return (
