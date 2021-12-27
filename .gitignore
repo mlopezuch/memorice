@@ -11,6 +11,9 @@
 # production
 /build
 
+# otros
+app.js
+
 # misc
 .DS_Store
 .env.local
