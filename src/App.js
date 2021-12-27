@@ -13,6 +13,11 @@ const initcards = [
 
 function App() {
   const barajaTarjetas = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setIntentos(0);
+    setMatches(0);
+
     let newCards = [...initcards, ...initcards];
     let sortedCards = newCards.sort(() => Math.random() - 0.5);
     let finalcards = sortedCards.map((card) => {
@@ -24,7 +29,12 @@ function App() {
   const [cards, setCards] = useState([]);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState(false);
+  const [intentos, setIntentos] = useState(0);
+  const [matches, setMatches] = useState(0);
+  const [mejorMarca, setmejorMarca] = useState(
+    window.localStorage.getItem("mejorMarca")
+  );
 
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
@@ -34,60 +44,67 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setDisabled(false);
+    setIntentos((prev) => prev + 1);
   };
 
   useEffect(() => {
-    //choiceOne && !choiceTwo && console.log('choiceOne vale: ',choiceOne);
-    //choiceTwo && console.log('choiceTwo vale: ',choiceTwo);
+    //choiceOne && !choiceTwo && console.log("choiceOne vale: ", choiceOne);
+    //choiceTwo && choiceOne && console.log("choiceTwo vale: ", choiceTwo);
 
     if (choiceOne && choiceTwo) {
-      setDisabled(true)
-      if (choiceOne.src === choiceTwo.src) {
-        console.log("Hay match! 😉");
-        setCards((prev) => {
-          return prev.map((card) => {
-            if (card.src === choiceOne.src) {
-              return { ...card, matched: true };
-            } else {
-              return card;
-            }
+      setDisabled(true);
+      if (choiceOne.id !== choiceTwo.id) {
+        if (choiceOne.src === choiceTwo.src) {
+          console.log("Hay match! 😉");
+          setMatches((prev) => prev + 1);
+          setCards((prev) => {
+            return prev.map((card) => {
+              if (card.src === choiceOne.src) {
+                return { ...card, matched: true };
+              } else {
+                return card;
+              }
+            });
           });
-        });
-        resetTurn();
-      } else {
-        setTimeout(() => {
           resetTurn();
-        }, 500);
+        } else {
+          setTimeout(() => {
+            resetTurn();
+          }, 500);
+        }
+      } else {
+        setChoiceTwo(null);
+        setDisabled(false);
       }
     }
   }, [choiceOne, choiceTwo]);
 
   useEffect(() => {
     barajaTarjetas();
-    const obj = { src: "/img/potion.png", matched: false, id: 0.5777705549368921 };
-    const obj2 = { src: "/img/potion.png", matched: false, id: 0.5777705549368921 };
-    console.log("Valor de obj: ", obj);
-    console.log("Valor de obj2: ", obj2);
-    console.log("Respuesta: ", obj.src === obj2.src);
   }, []);
+
+  useEffect(() => {
+    if (matches === 6) {
+      console.log("Se terminó la partida");
+      if ((mejorMarca && intentos < mejorMarca) || !mejorMarca) {
+        window.localStorage.setItem("mejorMarca", intentos);
+        setmejorMarca(intentos);
+      }
+    }
+  }, [matches, intentos, mejorMarca]);
 
   return (
     <div className="App">
-      <h1>Memorice</h1>
+      <h2>Juego de memoria</h2>
+      <div className="panel">
+        <button onClick={barajaTarjetas}>Nuevo juego</button>
+        <p>
+          Intentos: {intentos} / Mejor marca: {mejorMarca}
+        </p>
+      </div>
+
       <div className="container">
-        {cards.map((card, index) => {
-          if (card === choiceOne) {
-            console.log("Valor de card: ", card);
-            console.log("Valor de choiceOne: ", choiceOne);
-            console.log("Sus valores: ", card === choiceOne);
-          }
-
-          /* console.log(`${index+1}.- `);
-          console.log("card vale: ",card);
-          console.log("choiceOne vale: ",choiceOne);
-          console.log("card === choiceOne: ",card === choiceOne);
-          console.log("----------------------------------"); */
-
+        {cards.map((card) => {
           return (
             <SingleCard
               key={card.id}
