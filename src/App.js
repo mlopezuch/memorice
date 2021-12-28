@@ -3,12 +3,12 @@ import "./App.css";
 import SingleCard from "./SingleCard";
 
 const initcards = [
-  { src: "/img/diablos.jpg", matched: false },
-  { src: "/img/entenderias.jpg", matched: false },
-  { src: "/img/moe.jpg", matched: false },
-  { src: "/img/sabroso.jpg", matched: false },
-  { src: "/img/tenemos.jpg", matched: false },
-  { src: "/img/tudime.jpg", matched: false },
+  { src: "./img/diablos.jpg", matched: false },
+  { src: "./img/entenderias.jpg", matched: false },
+  { src: "./img/moe.jpg", matched: false },
+  { src: "./img/sabroso.jpg", matched: false },
+  { src: "./img/tenemos.jpg", matched: false },
+  { src: "./img/tudime.jpg", matched: false },
 ];
 
 function App() {
