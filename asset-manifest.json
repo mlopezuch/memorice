@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/memory-game/static/css/main.7ea7431b.css",
-    "main.js": "/memory-game/static/js/main.baaeec5f.js",
-    "index.html": "/memory-game/index.html"
+    "main.css": "/memorice/static/css/main.7ea7431b.css",
+    "main.js": "/memorice/static/js/main.baaeec5f.js",
+    "index.html": "/memorice/index.html"
   },
   "entrypoints": [
     "static/css/main.7ea7431b.css",
